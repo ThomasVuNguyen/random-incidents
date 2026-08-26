@@ -1,0 +1,11 @@
+# Incidents
+
+## 0001 — Mac mini and Coolify storage exhaustion
+
+- [Incident report](0001_mac_mini_coolify_storage_exhaustion.md)
+- [Generated incident image](0001_mac_mini_coolify_storage_exhaustion.png)
+
+## 0002 — Mac mini power flicker left Coolify behind a 502
+
+- [Incident report](0002_mac_mini_power_flicker_coolify_502.md)
+- [Generated incident image](0002_mac_mini_power_flicker_coolify_502.png)

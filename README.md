@@ -1,0 +1,24 @@
+# What are the incidents?
+
+Sometimes shit happen (servers go down, keys get leaked, data gets corrupted, etc.) and I often let my Codex, Claude, Antigravity, OpenCode, Conductor, etc solve.
+
+This is a place to log all of them.
+
+
+# Summary
+
+## 0001 — Mac mini and Coolify storage exhaustion — 2026-08-21
+
+`cloud.comfyspace.tech` returned HTTP 500 after both the Mac mini Data volume and the production Lima VM filled. Codex cleared safe host caches, repaired the corrupted ext4 guest filesystem offline, pruned unused Docker images and build cache, trimmed the virtual disk, removed an abandoned application and its volumes, and completed an approved cleanup of obsolete local development data. Coolify returned healthy, with safe free-space headroom on both storage layers.
+
+**Solved by:** Codex
+
+**Report:** [incidents/0001_mac_mini_coolify_storage_exhaustion.md](incidents/0001_mac_mini_coolify_storage_exhaustion.md)
+
+## 0002 — Mac mini power flicker left Coolify behind a 502 — 2026-08-26
+
+Two power flickers rebooted the Mac mini. Cloudflare returned, but the production Lima VM stayed stopped after its startup job failed once and did not retry. Codex restarted the VM, verified healthy core services and public routes, then updated the startup job to retry failed launches every 30 seconds. After the owner completed the required local startup-security changes, a controlled reboot proved the unattended macOS, Lima, Coolify, Cloudflare, and public-route chain. Automatic restart after power failure is enabled.
+
+**Solved by:** Codex
+
+**Report:** [incidents/0002_mac_mini_power_flicker_coolify_502.md](incidents/0002_mac_mini_power_flicker_coolify_502.md)
