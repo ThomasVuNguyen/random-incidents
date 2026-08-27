@@ -9,3 +9,8 @@
 
 - [Incident report](0002_mac_mini_power_flicker_coolify_502.md)
 - [Generated incident image](0002_mac_mini_power_flicker_coolify_502.png)
+
+## 0003 — Obsolete Data Cloud MCPs caused Antigravity errors
+
+- [Incident report](0003_antigravity_obsolete_data_cloud_mcp.md)
+- [Generated incident image](0003_antigravity_obsolete_data_cloud_mcp.png)

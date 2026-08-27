@@ -22,3 +22,11 @@ Two power flickers rebooted the Mac mini. Cloudflare returned, but the productio
 **Solved by:** Codex
 
 **Report:** [incidents/0002_mac_mini_power_flicker_coolify_502.md](incidents/0002_mac_mini_power_flicker_coolify_502.md)
+
+## 0003 — Obsolete Data Cloud MCPs caused Antigravity errors — 2026-08-27
+
+Antigravity's shared MCP catalog still contained four Google Data Cloud integrations after their extension proxy had been removed. Codex deleted only the orphaned `context`, `notebooks`, `visualization`, and `data-agent-kit` entries, preserved the rest of the catalog, and verified valid configuration, owner-only permissions, a clean MCP listing, and a completed authenticated model conversation without the missing-module error.
+
+**Solved by:** Codex
+
+**Report:** [incidents/0003_antigravity_obsolete_data_cloud_mcp.md](incidents/0003_antigravity_obsolete_data_cloud_mcp.md)
