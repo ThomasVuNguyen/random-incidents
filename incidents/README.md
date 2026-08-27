@@ -14,3 +14,8 @@
 
 - [Incident report](0003_antigravity_obsolete_data_cloud_mcp.md)
 - [Generated incident image](0003_antigravity_obsolete_data_cloud_mcp.png)
+
+## 0004 — Antigravity MCP catalog audit and Zernio removal
+
+- [Incident report](0004_antigravity_mcp_catalog_audit_zernio_removal.md)
+- [Generated incident image](0004_antigravity_mcp_catalog_audit_zernio_removal.png)

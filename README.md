@@ -30,3 +30,11 @@ Antigravity's shared MCP catalog still contained four Google Data Cloud integrat
 **Solved by:** Codex
 
 **Report:** [incidents/0003_antigravity_obsolete_data_cloud_mcp.md](incidents/0003_antigravity_obsolete_data_cloud_mcp.md)
+
+## 0004 — Antigravity MCP catalog audit and Zernio removal — 2026-08-27
+
+Antigravity still displayed five red MCP rows after the Data Cloud cleanup. Codex established that MongoDB, Onshape, Penpot, and Pixels were disabled-but-visible, while Pencil remained enabled against an application that had been moved to Trash. Zernio was removed as requested, the other entries were preserved pending an owner decision, and a valid catalog plus a completed authenticated model response verified the change.
+
+**Solved by:** Codex
+
+**Report:** [incidents/0004_antigravity_mcp_catalog_audit_zernio_removal.md](incidents/0004_antigravity_mcp_catalog_audit_zernio_removal.md)
