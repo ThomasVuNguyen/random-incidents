@@ -19,3 +19,8 @@
 
 - [Incident report](0004_antigravity_mcp_catalog_audit_zernio_removal.md)
 - [Generated incident image](0004_antigravity_mcp_catalog_audit_zernio_removal.png)
+
+## 0008 — Remote VM onboarding and wildcard DNS cutover
+
+- [Incident report](0008_remote_vm_coolify_wildcard_dns_cutover.md)
+- [Generated incident image](0008_remote_vm_coolify_wildcard_dns_cutover.png)

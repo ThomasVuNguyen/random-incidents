@@ -38,3 +38,11 @@ Antigravity still displayed five red MCP rows after the Data Cloud cleanup. Code
 **Solved by:** Codex
 
 **Report:** [incidents/0004_antigravity_mcp_catalog_audit_zernio_removal.md](incidents/0004_antigravity_mcp_catalog_audit_zernio_removal.md)
+
+## 0008 — Remote VM onboarding and wildcard DNS cutover — 2026-09-01
+
+A newly provisioned remote VM was securely added to Coolify and assigned an existing Cloudflare wildcard route after an owner-approved origin cutover. Codex verified the host, registered and validated the server, recovered its initially missing Traefik listener, replaced the prior wildcard target, and proved public HTTP and HTTPS reached the new origin. A stale proxy status led to a failed queued restart and brief test-route 522; Codex detected it immediately, restored the Coolify-managed proxy, and reverified healthy host and public routing state.
+
+**Solved by:** Codex
+
+**Report:** [incidents/0008_remote_vm_coolify_wildcard_dns_cutover.md](incidents/0008_remote_vm_coolify_wildcard_dns_cutover.md)
