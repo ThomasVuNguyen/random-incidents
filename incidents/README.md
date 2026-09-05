@@ -20,6 +20,21 @@
 - [Incident report](0004_antigravity_mcp_catalog_audit_zernio_removal.md)
 - [Generated incident image](0004_antigravity_mcp_catalog_audit_zernio_removal.png)
 
+## 0005 — OpenCode installed but the active shell could not find it
+
+- [Incident report](0005_opencode_path_not_loaded.md)
+- [Generated incident image](0005_opencode_path_not_loaded.png)
+
+## 0006 — macOS opened too many apps after login
+
+- [Incident report](0006_macos_startup_app_cleanup.md)
+- [Generated incident image](0006_macos_startup_app_cleanup.png)
+
+## 0007 — draw.beenex.org briefly returned an upstream 403
+
+- [Incident report](0007_draw_beenex_transient_upstream_403.md)
+- [Generated incident image](0007_draw_beenex_transient_upstream_403.png)
+
 ## 0008 — Remote VM onboarding and wildcard DNS cutover
 
 - [Incident report](0008_remote_vm_coolify_wildcard_dns_cutover.md)

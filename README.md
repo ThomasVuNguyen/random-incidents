@@ -39,6 +39,30 @@ Antigravity still displayed five red MCP rows after the Data Cloud cleanup. Code
 
 **Report:** [incidents/0004_antigravity_mcp_catalog_audit_zernio_removal.md](incidents/0004_antigravity_mcp_catalog_audit_zernio_removal.md)
 
+## 0005 — OpenCode installed but the active shell could not find it — 2026-08-27
+
+OpenCode `1.18.23` installed correctly and added its executable directory to `.zshrc`, but the already-running Terminal session still had the old PATH. Codex verified the executable, confirmed the shell configuration, and proved that a fresh interactive zsh finds and runs OpenCode successfully. Reloading `.zshrc` fixes the existing tab; future Terminal windows work automatically.
+
+**Solved by:** Codex
+
+**Report:** [incidents/0005_opencode_path_not_loaded.md](incidents/0005_opencode_path_not_loaded.md)
+
+## 0006 — macOS opened too many apps after login — 2026-08-31
+
+macOS opened a mix of explicit Login Items, nested helpers, and previously open applications after restart. Codex removed every visible Login Item except Google Drive and Shottr, preserved Tailscale's login helper, disabled the other user and system startup services, and turned off session restoration. Mailspring and the remaining ChatGPT Atlas data were moved to a recoverable Trash folder; Clicky and the Atlas app bundle were already absent, so their stale startup records were cleared.
+
+**Solved by:** Codex
+
+**Report:** [incidents/0006_macos_startup_app_cleanup.md](incidents/0006_macos_startup_app_cleanup.md)
+
+## 0007 — draw.beenex.org briefly returned an upstream 403 — 2026-09-01
+
+`draw.beenex.org` briefly returned HTTP 403 even though the Coolify application, frontend, backend, Traefik, and host remained healthy and uninterrupted. Codex confirmed the rejected navigation never reached the application, isolated the event to the upstream Cloudflare/edge-to-Traefik path, avoided an unnecessary restart, and verified the origin plus the public root, asset, and API routes all returned HTTP 200 after the transient denial cleared.
+
+**Solved by:** Codex
+
+**Report:** [incidents/0007_draw_beenex_transient_upstream_403.md](incidents/0007_draw_beenex_transient_upstream_403.md)
+
 ## 0008 — Remote VM onboarding and wildcard DNS cutover — 2026-09-01
 
 A newly provisioned remote VM was securely added to Coolify and assigned an existing Cloudflare wildcard route after an owner-approved origin cutover. Codex verified the host, registered and validated the server, recovered its initially missing Traefik listener, replaced the prior wildcard target, and proved public HTTP and HTTPS reached the new origin. A stale proxy status led to a failed queued restart and brief test-route 522; Codex detected it immediately, restored the Coolify-managed proxy, and reverified healthy host and public routing state.
@@ -46,3 +70,11 @@ A newly provisioned remote VM was securely added to Coolify and assigned an exis
 **Solved by:** Codex
 
 **Report:** [incidents/0008_remote_vm_coolify_wildcard_dns_cutover.md](incidents/0008_remote_vm_coolify_wildcard_dns_cutover.md)
+
+## 0009 — No offsite database backups across Coolify infrastructure — 2026-09-05
+
+A backup audit found that 4 of 5 PostgreSQL databases had zero backup schedules, and the one that did (peopledb-postgres) stored dumps only on the same server. No S3 or offsite storage was configured anywhere. Antigravity created a GCS bucket (`comfyspace-coolify-backup`) with S3-compatible HMAC credentials, added it as a Coolify S3 storage destination, and configured daily backup schedules with S3 upload for all 5 PostgreSQL databases — with 7-day local and 30-day offsite retention.
+
+**Solved by:** Antigravity
+
+**Report:** [incidents/0009_no_offsite_database_backups.md](incidents/0009_no_offsite_database_backups.md)
