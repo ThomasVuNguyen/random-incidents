@@ -39,3 +39,14 @@
 
 - [Incident report](0008_remote_vm_coolify_wildcard_dns_cutover.md)
 - [Generated incident image](0008_remote_vm_coolify_wildcard_dns_cutover.png)
+
+## 0009 — No offsite database backups across Coolify infrastructure
+
+- [Incident report](0009_no_offsite_database_backups.md)
+- [Generated incident image](0009_no_offsite_database_backups.png)
+
+## 0010 — Antigravity & Antigravity IDE Chat History Cleanse and Archival
+
+- [Incident report](0010_antigravity_and_ide_chat_history_cleanse.md)
+- [Generated incident image](0010_antigravity_and_ide_chat_history_cleanse.png)
+

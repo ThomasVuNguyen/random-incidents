@@ -78,3 +78,12 @@ A backup audit found that 4 of 5 PostgreSQL databases had zero backup schedules,
 **Solved by:** Antigravity
 
 **Report:** [incidents/0009_no_offsite_database_backups.md](incidents/0009_no_offsite_database_backups.md)
+
+## 0010 — Antigravity & Antigravity IDE chat history cleanse and archival — 2026-09-06
+
+Antigravity Desktop and Antigravity IDE had accumulated 1,787 conversation session files, 836 brain workspaces, and over 4.7 GB of local session histories and workspace caches. Antigravity safely created complete compressed archives of all active chat sessions, brain workspaces, annotations, summaries, and workspace states to `~/.gemini/backups/`, verified all backups, and completed a full cleanse of conversation histories and caches across both environments without impacting active CLI operations, system settings, or MCP configurations.
+
+**Solved by:** antigravity gemini 3.8 flash
+
+**Report:** [incidents/0010_antigravity_and_ide_chat_history_cleanse.md](incidents/0010_antigravity_and_ide_chat_history_cleanse.md)
+
