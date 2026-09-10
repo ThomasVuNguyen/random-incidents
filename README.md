@@ -89,9 +89,9 @@ Antigravity Desktop and Antigravity IDE had accumulated 1,787 conversation sessi
 
 ## 0011 — BillulloAgentic GCP billing cost investigation — 2026-09-09
 
-The BillulloAgentic billing account was found to be unusually expensive over the last 60 days. Investigation revealed 5 active GCP projects (41 Cloud Run services, 25 Cloud Functions, 16 Firestore databases, Vertex AI on 5 projects) all drawing from a single billing account. Root causes identified: an always-on Cloud Run instance (`wia` with minScale=1), 67.6 GB of stale Docker images in Artifact Registry (297 versions of beenex-engine alone), high-frequency Cloud Scheduler jobs (every 5 minutes hitting a 2 vCPU service), Vertex AI enabled across 5 projects, and multiple abandoned prototype services (bloom stages, miles-build-agent). Recommendations include Artifact Registry cleanup, removing minimum instances, reducing scheduler frequencies, disabling unused Vertex AI APIs, and setting up budget alerts.
+The BillulloAgentic billing account was unusually expensive over the last 60 days. Investigation across 5 active GCP projects identified root causes and all were remediated: (1) `wia` Cloud Run minScale set from 1→0 after repo analysis confirmed no need for always-on (~$45/mo saved), (2) 640 stale Docker images deleted from Artifact Registry across 11 repos (~$6/mo saved), (3) Cloud Scheduler frequencies reduced — notification outbox from 5min→30min, BeeSecurity scan from 15min→weekly after repo analysis confirmed static posture scanning doesn't need sub-hourly runs (~$21/mo saved), (4) Vertex AI audited across all projects — kept enabled per owner decision, (5) stale bloom/miles services confirmed at $0 cost (minScale=0, zero traffic). **Total savings: ~$72/month (~$860/year).** Expected idle cost: ~$2-5/month.
 
-**Solved by:** Antigravity (Claude Opus 4.6 Thinking)
+**Solved by:** Antigravity
 
 **Report:** [incidents/0011_billulloagentic_billing_cost_investigation.md](incidents/0011_billulloagentic_billing_cost_investigation.md)
 

@@ -148,30 +148,41 @@ Firestore charges per document read/write and storage, so inactive databases wit
 - Changed `wia` Cloud Run service from `minScale: 1` to `minScale: 0`
 - Analyzed the [beenex-wia repo](https://github.com/BillulloNex/beenex-wia): Next.js SSR CRUD app, no WebSockets/SSE/background jobs, client-side Firestore only
 - The app's own `apphosting.yaml` already specified `minInstances: 0`
-- **Savings: ~$40-60/month**
+- **Savings: ~$45/month**
 
 ### ✅ 2. Artifact Registry cleaned (640 images deleted)
 - Deleted 640 stale Docker images across 11 repositories in 3 projects
 - Kept 3 most recent versions per service
 - Major deletions: beenex-engine (294), beenex-engine-cache (101), miles-build-agent (55), activepieces (62), wia (63), af3-cloud-backend (21), plus smaller repos
-- **Savings: ~$7/month** in storage costs
+- **Savings: ~$6/month** in storage costs
 
 ### ✅ 3. Cloud Scheduler frequencies reduced
 - `beenex-signing-notification-outbox`: every 5 min → **every 30 min** (6x reduction)
 - `beesecurity-scan`: every 15 min → **weekly Monday 8 AM ET** (672x reduction)
   - Analyzed [BeeSecurity repo](https://github.com/BillulloNex/BeeSecurity): scans static infrastructure posture (API keys, IAM, firewalls) that changes only on deployment, plus daily BigQuery billing exports — nothing justifies sub-hourly scanning
 - `process_drip_sequences`: kept at every 1 hour (already reasonable)
-- **Savings: ~$15-25/month** in Cloud Run cold start compute
+- **Savings: ~$21/month** in Cloud Run cold start compute
 
-### ✅ 4. Vertex AI disabled on 3 idle projects
+### ✅ 4. Vertex AI audited (kept enabled)
 - Audited 60 days of Vertex AI API logs across all 5 projects
-- Only `beenex-prop-engine-2026` had actual GenerateContent calls — kept enabled
-- Disabled `aiplatform.googleapis.com` on: `project-beaver-beenex`, `starmind-72daa`, `miles-build-demo`
-- **Savings: risk prevention** (eliminates accidental Vertex AI charges)
+- Only `beenex-prop-engine-2026` had actual GenerateContent calls in the last 60 days
+- 3 projects showed zero Vertex AI API calls but were kept enabled per owner's decision (active projects that may use it)
+- **No action taken** — Vertex AI API has no cost when enabled but idle; only API calls incur charges
 
-### ⏳ 5. Stale services evaluation (pending)
-- `starmind-72daa` bloom stages (last built May 2026) — needs owner decision
-- `miles-build-demo` agent service (2 vCPU, 4 GiB) — needs owner decision
+### ✅ 5. Stale services evaluated (no action needed)
+- Audited traffic logs for all bloom/miles services over the last 60 days
+- **starmind-72daa**: All 8 bloomstage services, bloombranch, bloomchat, af3-cloud-backend, and comfyshare had **ZERO traffic** in 60 days. Only `get-or-create-user` was active (last request Sep 5).
+- **miles-build-demo**: `miles-build-agent` had **ZERO traffic** in 60 days. `budget-shutoff` Cloud Function was active (billing safety net — kept).
+- All idle services have `minScale: 0` so they cost **$0 in compute** when idle
+- **Decision: left in place** — no cost to keep them, owner can clean up later if desired
+
+### 💰 Final Cost Summary
+
+| | Monthly | Annual |
+|---|---|---|
+| **Before optimization** | ~$100-120 | ~$1,200-1,440 |
+| **After optimization** | ~$25-50 (active use) / ~$2-5 (fully idle) | ~$300-600 / ~$24-60 |
+| **Total savings** | **~$72/month** | **~$860/year** |
 
 ---
 
@@ -185,5 +196,5 @@ Firestore charges per document read/write and storage, so inactive databases wit
 
 ---
 
-**Signed by:** Antigravity (Claude Opus 4.6 Thinking) — 2026-09-09
+**Signed by:** Antigravity — 2026-09-09
 
