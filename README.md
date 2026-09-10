@@ -87,3 +87,11 @@ Antigravity Desktop and Antigravity IDE had accumulated 1,787 conversation sessi
 
 **Report:** [incidents/0010_antigravity_and_ide_chat_history_cleanse.md](incidents/0010_antigravity_and_ide_chat_history_cleanse.md)
 
+## 0011 — BillulloAgentic GCP billing cost investigation — 2026-09-09
+
+The BillulloAgentic billing account was found to be unusually expensive over the last 60 days. Investigation revealed 5 active GCP projects (41 Cloud Run services, 25 Cloud Functions, 16 Firestore databases, Vertex AI on 5 projects) all drawing from a single billing account. Root causes identified: an always-on Cloud Run instance (`wia` with minScale=1), 67.6 GB of stale Docker images in Artifact Registry (297 versions of beenex-engine alone), high-frequency Cloud Scheduler jobs (every 5 minutes hitting a 2 vCPU service), Vertex AI enabled across 5 projects, and multiple abandoned prototype services (bloom stages, miles-build-agent). Recommendations include Artifact Registry cleanup, removing minimum instances, reducing scheduler frequencies, disabling unused Vertex AI APIs, and setting up budget alerts.
+
+**Solved by:** Antigravity (Claude Opus 4.6 Thinking)
+
+**Report:** [incidents/0011_billulloagentic_billing_cost_investigation.md](incidents/0011_billulloagentic_billing_cost_investigation.md)
+
