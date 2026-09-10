@@ -140,6 +140,41 @@ Firestore charges per document read/write and storage, so inactive databases wit
 
 ---
 
+---
+
+## Remediation Actions Taken (2026-09-09)
+
+### ✅ 1. WIA minScale set to 0
+- Changed `wia` Cloud Run service from `minScale: 1` to `minScale: 0`
+- Analyzed the [beenex-wia repo](https://github.com/BillulloNex/beenex-wia): Next.js SSR CRUD app, no WebSockets/SSE/background jobs, client-side Firestore only
+- The app's own `apphosting.yaml` already specified `minInstances: 0`
+- **Savings: ~$40-60/month**
+
+### ✅ 2. Artifact Registry cleaned (640 images deleted)
+- Deleted 640 stale Docker images across 11 repositories in 3 projects
+- Kept 3 most recent versions per service
+- Major deletions: beenex-engine (294), beenex-engine-cache (101), miles-build-agent (55), activepieces (62), wia (63), af3-cloud-backend (21), plus smaller repos
+- **Savings: ~$7/month** in storage costs
+
+### ✅ 3. Cloud Scheduler frequencies reduced
+- `beenex-signing-notification-outbox`: every 5 min → **every 30 min** (6x reduction)
+- `beesecurity-scan`: every 15 min → **weekly Monday 8 AM ET** (672x reduction)
+  - Analyzed [BeeSecurity repo](https://github.com/BillulloNex/BeeSecurity): scans static infrastructure posture (API keys, IAM, firewalls) that changes only on deployment, plus daily BigQuery billing exports — nothing justifies sub-hourly scanning
+- `process_drip_sequences`: kept at every 1 hour (already reasonable)
+- **Savings: ~$15-25/month** in Cloud Run cold start compute
+
+### ✅ 4. Vertex AI disabled on 3 idle projects
+- Audited 60 days of Vertex AI API logs across all 5 projects
+- Only `beenex-prop-engine-2026` had actual GenerateContent calls — kept enabled
+- Disabled `aiplatform.googleapis.com` on: `project-beaver-beenex`, `starmind-72daa`, `miles-build-demo`
+- **Savings: risk prevention** (eliminates accidental Vertex AI charges)
+
+### ⏳ 5. Stale services evaluation (pending)
+- `starmind-72daa` bloom stages (last built May 2026) — needs owner decision
+- `miles-build-demo` agent service (2 vCPU, 4 GiB) — needs owner decision
+
+---
+
 ## What Will Prevent This From Happening Again
 
 1. **Artifact Registry cleanup policies** on all repositories to auto-delete old images
@@ -151,3 +186,4 @@ Firestore charges per document read/write and storage, so inactive databases wit
 ---
 
 **Signed by:** Antigravity (Claude Opus 4.6 Thinking) — 2026-09-09
+
