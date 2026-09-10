@@ -50,3 +50,12 @@
 - [Incident report](0010_antigravity_and_ide_chat_history_cleanse.md)
 - [Generated incident image](0010_antigravity_and_ide_chat_history_cleanse.png)
 
+## 0011 — BillulloAgentic GCP billing cost investigation
+
+- [Incident report](0011_billulloagentic_billing_cost_investigation.md)
+- [Generated incident image](0011_billulloagentic_billing_cost_investigation.png)
+
+## 0012 — Confluence full data export before subscription cancellation
+
+- [Incident report](0012_confluence_full_data_export.md)
+- [Generated incident image](0012_confluence_full_data_export.png)

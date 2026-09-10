@@ -95,3 +95,11 @@ The BillulloAgentic billing account was unusually expensive over the last 60 day
 
 **Report:** [incidents/0011_billulloagentic_billing_cost_investigation.md](incidents/0011_billulloagentic_billing_cost_investigation.md)
 
+## 0012 — Confluence full data export before subscription cancellation — 2026-09-10
+
+BillulloNex needed to export all Confluence data before canceling their Atlassian subscription. Antigravity authenticated via the Atlassian Rovo MCP, enumerated all 25 spaces (22 current + 3 archived), and bulk-fetched 69 pages with full markdown content. An initial parallel subagent strategy failed because MCP permission prompts don't propagate to subagents, so the export was completed directly via bulk API calls. All pages were saved as both Markdown (with YAML frontmatter) and JSON (with full metadata) to a structured local export directory, with per-space manifests and a global index.
+
+**Solved by:** Antigravity (Claude Opus 4.6 Thinking)
+
+**Report:** [incidents/0012_confluence_full_data_export.md](incidents/0012_confluence_full_data_export.md)
+
