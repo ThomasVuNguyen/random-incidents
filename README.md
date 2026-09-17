@@ -103,3 +103,42 @@ BillulloNex needed to export all Confluence data before canceling their Atlassia
 
 **Report:** [incidents/0012_confluence_full_data_export.md](incidents/0012_confluence_full_data_export.md)
 
+## 0013 — Compute Engine RDP session establishment timeout — 2026-09-11
+
+Remote Desktop connections to `platinum-it-windows-6cpu-24gb-prod` reached the VM and authenticated but timed out while Windows created the session. Codex isolated the failure to a wedged Remote Desktop Services stack, attempted a targeted service restart, and rebooted the VM after `UmRdpService` became stuck in `STOP_PENDING`. Successful `thomas` and `ptuser06` logons, multiple active RDP sessions, and healthy RDP services verified the recovery.
+
+**Solved by:** Codex
+
+**Report:** [incidents/0013_compute_engine_rdp_session_timeout.md](incidents/0013_compute_engine_rdp_session_timeout.md)
+
+## 0014 — `cloud.comfyspace.tech` intermittently returned Cloudflare Tunnel 1033 — 2026-09-12
+
+Cloudflare intermittently returned HTTP 530 / Tunnel error 1033 for the Coolify control-plane URL. Public and direct-origin probes failed together briefly, then both recovered without a restart; the tunnel connector was active again afterward. The incident was isolated to a transient Mac mini/tunnel reachability flap, with no evidence of a Lenovo workload or DNS failure.
+
+**Solved by:** Codex (automatic recovery observed; recurrence prevention remains)
+
+**Report:** [incidents/0014_cloudflare_tunnel_1033_flap.md](incidents/0014_cloudflare_tunnel_1033_flap.md)
+
+## 0015 — Large ingestion exhausted VM memory headroom — 2026-09-12
+
+A large ingestion job left the shared `beenex.cloud` VM with only a few hundred MiB of available RAM and no swap. Severe memory reclaim produced high I/O wait and dozens of blocked processes. Codex added a persistent 16 GiB low-swappiness safety buffer, then permanently removed the retired Twenty stack after owner approval and verified that the separately deleted Teable stack left no Coolify or host residue. Memory use fell from about 13 GiB to 4 GiB, with about 10 GiB available and unaffected routes healthy.
+
+**Solved by:** Codex
+
+**Report:** [incidents/0015_ingestion_memory_pressure_swap_safety_net.md](incidents/0015_ingestion_memory_pressure_swap_safety_net.md)
+
+## 0016 — Rybbit Globe showed a CARTO API-key watermark — 2026-09-14
+
+Rybbit 2.6.0's 2D Globe depended on a CARTO raster-tile endpoint that began watermarking unauthenticated requests, even though the BeeNex deployment had not changed. Codex confirmed the upstream cause, force-redeployed the existing Coolify stack to Rybbit 2.9.1, and verified the health endpoint, preserved analytics data, OpenFreeMap attribution, and a watermark-free live Globe.
+
+**Solved by:** Codex
+
+**Report:** [incidents/0016_rybbit_carto_map_api_key_watermark.md](incidents/0016_rybbit_carto_map_api_key_watermark.md)
+
+## 0017 — Atlassian MCP browser popup spam on Antigravity IDE startup — 2026-09-17
+
+The `atlassian-rovo-mcp` MCP server was still enabled in `~/.gemini/config/mcp_config.json` after the Atlassian subscription was being cancelled. Every IDE launch triggered OAuth authentication attempts that opened tens of `id.atlassian.com` browser tabs, all showing "We couldn't identify the app requesting access" errors. Antigravity disabled the server by adding `"disabled": true` to its config entry.
+
+**Solved by:** Antigravity (Claude Opus 4.6 Thinking)
+
+**Report:** [incidents/0017_atlassian_mcp_browser_popup_spam.md](incidents/0017_atlassian_mcp_browser_popup_spam.md)

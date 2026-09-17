@@ -59,3 +59,23 @@
 
 - [Incident report](0012_confluence_full_data_export.md)
 - [Generated incident image](0012_confluence_full_data_export.png)
+
+## 0013 — Compute Engine RDP session establishment timeout
+
+- [Incident report](0013_compute_engine_rdp_session_timeout.md)
+- [Generated incident image](0013_compute_engine_rdp_session_timeout.png)
+
+## 0014 — `cloud.comfyspace.tech` intermittently returned Cloudflare Tunnel 1033
+
+- [Incident report](0014_cloudflare_tunnel_1033_flap.md)
+- [Generated incident image](0014_cloudflare_tunnel_1033_flap.png)
+
+## 0015 — Large ingestion exhausted VM memory headroom
+
+- [Incident report](0015_ingestion_memory_pressure_swap_safety_net.md)
+- [Generated incident image](0015_ingestion_memory_pressure_swap_safety_net.png)
+
+## 0016 — Rybbit Globe showed a CARTO API-key watermark
+
+- [Incident report](0016_rybbit_carto_map_api_key_watermark.md)
+- [Generated incident image](0016_rybbit_carto_map_api_key_watermark.png)
