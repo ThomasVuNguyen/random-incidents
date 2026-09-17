@@ -8,19 +8,18 @@ The root cause was that the `atlassian-rovo-mcp` server was configured in `~/.ge
 
 ## What I did to fix it
 
-Added `"disabled": true` to the `atlassian-rovo-mcp` entry in `~/.gemini/config/mcp_config.json`. This prevents the MCP server from launching on IDE startup while preserving the configuration in case it's ever needed again.
+**First attempt** (failed): Added `"disabled": true` to the `atlassian-rovo-mcp` entry in `~/.gemini/config/mcp_config.json`. This did NOT work — popups continued because there were multiple cached MCP directories and running processes.
 
-**File changed:** `~/.gemini/config/mcp_config.json`
+**Second attempt** (nuclear — worked): Completely removed everything Atlassian-related:
 
-```diff
-     "atlassian-rovo-mcp": {
-+      "disabled": true,
-       "command": "/Users/thomasthemaker/.nvm/versions/node/v24.14.1/bin/node",
-       "args": [
-         "/Users/thomasthemaker/.gemini/config/atlassian-mcp-compat.mjs"
-       ]
-     },
-```
+1. **Deleted the server entry** from `~/.gemini/config/mcp_config.json` entirely
+2. **Deleted the compat wrapper script** `~/.gemini/config/atlassian-mcp-compat.mjs`
+3. **Deleted all cached MCP tool schemas** across all 3 environments:
+   - `~/.gemini/antigravity/mcp/atlassian-rovo-mcp/` + `atlassian-mcp-server/`
+   - `~/.gemini/antigravity-cli/mcp/atlassian-rovo-mcp/` + `atlassian-mcp-server/`
+   - `~/.gemini/antigravity-ide/mcp/atlassian-rovo-mcp/` + `atlassian-mcp-server/`
+4. **Removed all Atlassian permission grants** from `~/.gemini/config/config.json` (both `globalPermissionGrants` and learned permissions)
+5. **Force-killed 12 zombie Atlassian processes** (`mcp-remote` and `atlassian-mcp-compat.mjs` instances)
 
 ## What will prevent this from happening again
 
